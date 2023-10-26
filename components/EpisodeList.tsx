@@ -17,7 +17,7 @@ export default function EpisodeList() {
   })
 
   const [searchQuery, setSearchQuery] = useState('')
-  const [filteredEpisodes, setFilteredEpisodes] = useState<EpisodeType[]>([])
+  const [filteredEpisodes, setFilteredEpisodes] = useState<Episode[]>([])
 
   const toggleFavorite = (id: number) => {
     const index = favorites.indexOf(id)

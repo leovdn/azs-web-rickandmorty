@@ -9,6 +9,7 @@ const EpisodeDetail: React.FC = () => {
   const { episodes, loading, error } = useEpisodeContext() // Use the context hook to access episodes
 
   const [isFavorite, setIsFavorite] = useState(false)
+  const [isWatched, setIsWatched] = useState(false)
 
   // Function to toggle the favorite status
   const toggleFavorite = () => {
@@ -25,10 +26,33 @@ const EpisodeDetail: React.FC = () => {
 
     setIsFavorite((prevFavorite) => !prevFavorite)
   }
+
+  // Function to toggle the watched status
+  const toggleWatched = () => {
+    const watched = JSON.parse(localStorage.getItem('watched') || '[]')
+    if (isWatched) {
+      // Remove from watched
+      const updatedWatched = watched.filter(
+        (watchedId: string) => watchedId !== id
+      )
+      localStorage.setItem('watched', JSON.stringify(updatedWatched))
+    } else {
+      // Add to watched
+      watched.push(id)
+      localStorage.setItem('watched', JSON.stringify(watched))
+    }
+
+    setIsWatched((prevWatched) => !prevWatched)
+  }
+
   useEffect(() => {
     // Check if the current episode is in the list of favorites
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]')
     setIsFavorite(favorites.includes(id))
+
+    // Check if the current episode is in the list of watched episodes
+    const watched = JSON.parse(localStorage.getItem('watched') || '[]')
+    setIsWatched(watched.includes(id))
 
     return () => {
       // Cleanup, if needed
@@ -45,13 +69,14 @@ const EpisodeDetail: React.FC = () => {
     return <p>Episode not found</p>
   }
 
-  console.log(id)
-
   return (
     <div>
       <h1>{episode.name}</h1>
       <button onClick={toggleFavorite}>
         {isFavorite ? 'Unfavorite' : 'Favorite'}
+      </button>
+      <button onClick={toggleWatched}>
+        {isWatched ? 'Unwatched' : 'Watched'}
       </button>
       <p>Episode Number: {episode.id}</p>
       <p>Air Date: {episode.air_date}</p>
