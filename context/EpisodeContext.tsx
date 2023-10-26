@@ -6,14 +6,15 @@ import React, {
   useState,
 } from 'react'
 import { ReactNode } from 'react'
-import { useQuery } from '@apollo/client'
-import { GET_EPISODESLIST } from '../queries/queries'
+
 import { Episode } from '../types/types'
+import { useEpisodes } from '../hooks/useEpisodes'
+import { ApolloError } from '@apollo/client'
 
 interface EpisodeContextType {
   episodes: Episode[]
   loading: boolean
-  error: string | null
+  error: ApolloError | undefined
 }
 
 const EpisodeContext = createContext<EpisodeContextType | undefined>(undefined)
@@ -22,21 +23,13 @@ export const EpisodeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [episodes, setEpisodes] = useState<Episode[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  const { data, error: queryError } = useQuery(GET_EPISODESLIST)
+  const { data, loading, error } = useEpisodes()
 
   useEffect(() => {
     if (data) {
       setEpisodes(data.episodes.results)
-      setLoading(false)
     }
-    if (queryError) {
-      setError(queryError.message)
-      setLoading(false)
-    }
-  }, [data, queryError])
+  }, [data])
 
   const contextValue = useMemo(
     () => ({ episodes, loading, error }),
@@ -54,7 +47,7 @@ export const EpisodeProvider: React.FC<{ children: ReactNode }> = ({
 
   if (error) {
     // Use an error boundary component to catch the error and display a user-friendly message
-    return <div>Something went wrong: {error}</div>
+    return <div>Something went wrong: {error.message}</div>
   }
 
   return (

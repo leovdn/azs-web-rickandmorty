@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useEpisodeContext } from '../context/EpisodeContext'
 import { Episode } from '../types/types'
-import FavoriteButton from './FavoriteButton'
-import WatchedButton from './WatchedButton'
+import FavoriteButton from '../components/FavoriteButton'
+import WatchedButton from '../components/WatchedButton'
 
 export default function EpisodeList() {
   const { episodes, loading, error } = useEpisodeContext()

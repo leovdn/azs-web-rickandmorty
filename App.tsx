@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import EpisodeList from './components/EpisodeList'
-import EpisodeDetail from './components/EpisodeDetail'
-import FavoriteEpisodes from './components/Favorites'
+import EpisodeList from './pages/EpisodeList'
+import EpisodeDetail from './pages/EpisodeDetail'
+import FavoriteEpisodes from './pages/Favorites'
 
 function App() {
   return (

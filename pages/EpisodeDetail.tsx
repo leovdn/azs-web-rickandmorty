@@ -3,15 +3,15 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useEpisodeContext } from '../context/EpisodeContext'
-import FavoriteButton from './FavoriteButton'
-import WatchedButton from './WatchedButton'
+import FavoriteButton from '../components/FavoriteButton'
+import WatchedButton from '../components/WatchedButton'
 
 const EpisodeDetail: React.FC = () => {
   const { id } = useParams()
   const { episodes, loading, error } = useEpisodeContext() // Use the context hook to access episodes
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
+  if (error) return <p>Error: {error.message}</p>
 
   // Find the specific episode based on the episodeId parameter
   const episode = episodes.find((ep) => ep.id.toString() === id)
