@@ -22,7 +22,7 @@ export default function FavoriteEpisodes() {
   if (error) return <p>Something went wrong</p>
 
   const favoriteEpisodes = episodes.filter((episode: Episode) =>
-    favorites.includes(episode.id)
+    favorites.includes(parseInt(episode.id))
   )
 
   return (
