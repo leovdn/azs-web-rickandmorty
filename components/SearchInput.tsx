@@ -13,9 +13,16 @@ export default function SearchInput({ value, onChange }: SearchInputProps) {
   return (
     <TextField
       label="Search episode"
+      focused
+      placeholder="Search episode by name..."
       onChange={handleInputChange}
       value={value}
-      fullWidth
+      sx={{
+        maxWidth: '500px',
+        width: '100%',
+        backgroundColor: '#fff',
+        fill: '#fff',
+      }}
     />
   )
 }
