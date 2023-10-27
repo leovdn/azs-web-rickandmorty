@@ -13,8 +13,12 @@ type CharacterCardProps = {
   character: Character
 }
 
+type CharacterStatus = {
+  [key: string]: string
+}
+
 export default function CharacterCard({ character }: CharacterCardProps) {
-  const characterStatus = {
+  const characterStatus: CharacterStatus = {
     ['Alive']: 'success',
     ['Dead']: 'error',
     ['unknown']: 'default',
@@ -69,7 +73,16 @@ export default function CharacterCard({ character }: CharacterCardProps) {
 
           <Chip
             sx={{ borderRadius: '4px', marginTop: '1rem' }}
-            color={characterStatus[character.status]}
+            color={
+              characterStatus[character.status] as
+                | 'default'
+                | 'success'
+                | 'error'
+                | 'primary'
+                | 'secondary'
+                | 'info'
+                | 'warning'
+            }
             label={character.status}
           />
         </CardContent>
