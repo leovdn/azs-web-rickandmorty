@@ -5,7 +5,7 @@ import SearchInput from '../components/SearchInput'
 import useSearch from '../hooks/useSearch'
 import { EpisodeCard } from '../components/EpisodeCard'
 import { Box, Container } from '@mui/material'
-import { Dna } from 'react-loader-spinner'
+import Loader from '../components/Loader'
 
 export default function EpisodeList() {
   const { episodes, loading, error } = useEpisodeContext()
@@ -15,17 +15,7 @@ export default function EpisodeList() {
     searchKey: 'name',
   })
 
-  if (loading)
-    return (
-      <Dna
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="dna-loading"
-        wrapperStyle={{}}
-        wrapperClass="dna-wrapper"
-      />
-    )
+  if (loading) return <Loader />
 
   if (error) return <p>Something went wrong</p>
 
@@ -33,7 +23,7 @@ export default function EpisodeList() {
     <Box display="flex" flexDirection="column" alignItems="center" gap="4rem">
       <SearchInput value={searchQuery} onChange={setSearchQuery} />
 
-      <Container sx={{ display: 'flex', flexWrap: 'wrap', gap: '3rem' }}>
+      <Container sx={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
         {filteredItems.length === 0 ? (
           <p>No episodes found.</p>
         ) : (

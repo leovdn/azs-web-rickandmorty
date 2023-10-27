@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { HeaderContainer, HeaderContent, Logo } from '../styles/app'
 import logo from '../assets/logo.png'
-import { Button, Link } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 
 export default function Header() {
@@ -17,9 +17,9 @@ export default function Header() {
 
           <Button>
             <NavLink to="/favorites">
-              <Link>
+              <Typography variant="button" color="primary" fontWeight="bold">
                 Favorites <FavoriteBorderOutlinedIcon sx={{ marginLeft: 1 }} />
-              </Link>
+              </Typography>
             </NavLink>
           </Button>
         </Logo>

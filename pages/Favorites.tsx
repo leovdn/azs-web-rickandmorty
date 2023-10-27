@@ -30,7 +30,8 @@ export default function FavoriteEpisodes() {
   return (
     <Container>
       <h2>Favorite Episodes</h2>
-      <Box display="flex" alignItems="center" gap="2rem">
+
+      <Box display="flex" alignItems="center" gap="2rem" marginTop="4rem">
         {favoriteEpisodes.length === 0 && <p>No favorite episodes yet</p>}
 
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>

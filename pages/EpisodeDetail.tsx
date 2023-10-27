@@ -36,12 +36,17 @@ const EpisodeDetail: React.FC = () => {
         </Box>
 
         <Box>
-          <p>Episode Number: {episode.id}</p>
-          <p>Air Date: {episode.air_date}</p>
+          <p>
+            <strong>Episode: </strong> {episode.episode}
+          </p>
+          <p>
+            <strong>Air date: </strong> {episode.air_date}
+          </p>
+          <br />
           <h2>Characters in this Episode</h2>
         </Box>
 
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
+        <Box display="flex" flexWrap="wrap" gap="2rem" margin="2rem 0">
           {episode.characters.map((character) => (
             <CharacterCard key={character.id} character={character} />
           ))}
