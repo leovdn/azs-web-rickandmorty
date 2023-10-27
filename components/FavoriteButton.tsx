@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import { IconButton } from '@mui/material'
 interface FavoriteButtonProps {
   episodeId: string
 }
@@ -35,8 +36,21 @@ export default function FavoriteButton({ episodeId }: FavoriteButtonProps) {
   }, [episodeId])
 
   return (
-    <button onClick={toggleFavorite}>
-      {isFavorite ? 'Unfavorite' : 'Favorite'}
-    </button>
+    <IconButton
+      onClick={toggleFavorite}
+      sx={{
+        position: 'absolute',
+        top: 8,
+        left: 8,
+        zIndex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+      }}
+    >
+      {isFavorite ? (
+        <FavoriteIcon fontSize="large" color="error" />
+      ) : (
+        <FavoriteIcon fontSize="large" color="disabled" />
+      )}
+    </IconButton>
   )
 }

@@ -4,6 +4,7 @@ import { Episode } from '../types/types'
 import SearchInput from '../components/SearchInput'
 import useSearch from '../hooks/useSearch'
 import { EpisodeCard } from '../components/EpisodeCard'
+import { Container } from '@mui/material'
 
 export default function EpisodeList() {
   const { episodes, loading, error } = useEpisodeContext()
@@ -21,13 +22,15 @@ export default function EpisodeList() {
     <div>
       <SearchInput value={searchQuery} onChange={setSearchQuery} />
 
-      {filteredItems.length === 0 ? (
-        <p>No episodes found.</p>
-      ) : (
-        filteredItems.map((episode: Episode) => (
-          <EpisodeCard key={episode.id} episode={episode} />
-        ))
-      )}
+      <Container sx={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
+        {filteredItems.length === 0 ? (
+          <p>No episodes found.</p>
+        ) : (
+          filteredItems.map((episode: Episode) => (
+            <EpisodeCard key={episode.id} episode={episode} />
+          ))
+        )}
+      </Container>
     </div>
   )
 }

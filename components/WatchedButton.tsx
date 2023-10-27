@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import { IconButton } from '@mui/material'
 interface WatchedButtonProps {
   episodeId: string
 }
@@ -35,8 +36,21 @@ export default function WatchedButton({ episodeId }: WatchedButtonProps) {
   }, [episodeId])
 
   return (
-    <button onClick={toggleWatched}>
-      {isWatched ? 'Unwatched' : 'Watched'}
-    </button>
+    <IconButton
+      onClick={toggleWatched}
+      sx={{
+        position: 'absolute',
+        right: '4px',
+        top: '4px',
+        zIndex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+      }}
+    >
+      {isWatched ? (
+        <VisibilityIcon fontSize="large" color="primary" />
+      ) : (
+        <VisibilityIcon fontSize="large" color="disabled" />
+      )}
+    </IconButton>
   )
 }
