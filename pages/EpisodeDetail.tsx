@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useEpisodeContext } from '../context/EpisodeContext'
 import FavoriteButton from '../components/FavoriteButton'
 import WatchedButton from '../components/WatchedButton'
+import CharacterCard from '../components/CharacterCard'
 
 const EpisodeDetail: React.FC = () => {
   const { id } = useParams()
@@ -28,14 +29,10 @@ const EpisodeDetail: React.FC = () => {
       <p>Episode Number: {episode.id}</p>
       <p>Air Date: {episode.air_date}</p>
       <h2>Characters in this Episode</h2>
+
       <ul>
         {episode.characters.map((character) => (
-          <li key={character.id} style={{ border: '2px solid' }}>
-            <img src={character.image} alt={character.name} />
-            <p>Name: {character.name}</p>
-            <p>Species: {character.species}</p>
-            <p>Status: {character.status}</p>
-          </li>
+          <CharacterCard key={character.id} character={character} />
         ))}
       </ul>
     </div>
