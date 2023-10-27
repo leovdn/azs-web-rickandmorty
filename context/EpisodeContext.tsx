@@ -17,11 +17,11 @@ interface EpisodeContextType {
   error: ApolloError | undefined
 }
 
-const EpisodeContext = createContext<EpisodeContextType | undefined>(undefined)
+const EpisodeContext = createContext<EpisodeContextType | undefined>(
+  {} as EpisodeContextType
+)
 
-export const EpisodeProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+const EpisodeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [episodes, setEpisodes] = useState<Episode[]>([])
   const { data, loading, error } = useEpisodes()
 
@@ -37,7 +37,6 @@ export const EpisodeProvider: React.FC<{ children: ReactNode }> = ({
   )
 
   if (loading) {
-    // Show a loading spinner if the data takes more than 1 second to load
     setTimeout(() => {
       if (loading) {
         return <div>Loading...</div>
@@ -46,7 +45,6 @@ export const EpisodeProvider: React.FC<{ children: ReactNode }> = ({
   }
 
   if (error) {
-    // Use an error boundary component to catch the error and display a user-friendly message
     return <div>Something went wrong: {error.message}</div>
   }
 
@@ -58,10 +56,12 @@ export const EpisodeProvider: React.FC<{ children: ReactNode }> = ({
 }
 
 // Custom hook to access the context
-export const useEpisodeContext = () => {
+const useEpisodeContext = () => {
   const context = useContext(EpisodeContext)
   if (context === undefined) {
     throw new Error('useEpisodeContext must be used within an EpisodeProvider')
   }
   return context
 }
+
+export { EpisodeProvider, useEpisodeContext }
