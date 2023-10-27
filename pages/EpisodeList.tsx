@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useEpisodeContext } from '../context/EpisodeContext'
 import { Episode } from '../types/types'
 import FavoriteButton from '../components/FavoriteButton'
 import WatchedButton from '../components/WatchedButton'
+import SearchInput from '../components/SearchInput'
+import useSearch from '../hooks/useSearch'
 
 export default function EpisodeList() {
   const { episodes, loading, error } = useEpisodeContext()
 
-  const [searchQuery, setSearchQuery] = useState('')
-  const [filteredEpisodes, setFilteredEpisodes] = useState<Episode[]>([])
-
-  // Update filtered episodes when the search query changes
-  useEffect(() => {
-    const filtered = episodes.filter((episode) =>
-      episode.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-    setFilteredEpisodes(filtered)
-  }, [episodes, searchQuery])
+  const { searchQuery, setSearchQuery, filteredItems } = useSearch({
+    items: episodes,
+    searchKey: 'name',
+  })
 
   if (loading) return <p>Loading...</p>
 
@@ -25,17 +20,11 @@ export default function EpisodeList() {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Search by episode name"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-
-      {filteredEpisodes.length === 0 ? (
+      <SearchInput value={searchQuery} onChange={setSearchQuery} />
+      {filteredItems.length === 0 ? (
         <p>No episodes found.</p>
       ) : (
-        filteredEpisodes.map((episode: Episode) => (
+        filteredItems.map((episode: Episode) => (
           <div key={episode.id} style={{ border: '2px solid' }}>
             <FavoriteButton episodeId={episode.id} />
 
