@@ -25,9 +25,7 @@ export default function EpisodeList() {
         <p>No episodes found.</p>
       ) : (
         filteredItems.map((episode: Episode) => (
-          <div key={episode.id} style={{ border: '2px solid' }}>
-            <EpisodeCard episode={episode} />
-          </div>
+          <EpisodeCard key={episode.id} episode={episode} />
         ))
       )}
     </div>

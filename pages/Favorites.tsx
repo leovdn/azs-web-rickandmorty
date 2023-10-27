@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useEpisodeContext } from '../context/EpisodeContext'
 import { Episode } from '../types/types'
+import { EpisodeCard } from '../components/EpisodeCard'
 
 export default function FavoriteEpisodes() {
   const { episodes, loading, error } = useEpisodeContext()
 
-  const [favorites, setFavorites] = useState<number[]>(() => {
+  const [favorites, setFavorites] = useState<string[]>(() => {
     const favoritesFromStorage = localStorage.getItem('favorites')
     return favoritesFromStorage ? JSON.parse(favoritesFromStorage) : []
   })
@@ -22,7 +23,7 @@ export default function FavoriteEpisodes() {
   if (error) return <p>Something went wrong</p>
 
   const favoriteEpisodes = episodes.filter((episode: Episode) =>
-    favorites.includes(parseInt(episode.id))
+    favorites.includes(episode.id)
   )
 
   return (
@@ -31,11 +32,7 @@ export default function FavoriteEpisodes() {
       {favoriteEpisodes.length === 0 && <p>No favorite episodes yet</p>}
       <ul>
         {favoriteEpisodes.map((episode: Episode) => (
-          <li key={episode.id}>
-            <p>{episode.name}</p>
-            <p>{episode.air_date}</p>
-            <p>{episode.episode}</p>
-          </li>
+          <EpisodeCard key={episode.id} episode={episode} />
         ))}
       </ul>
     </div>

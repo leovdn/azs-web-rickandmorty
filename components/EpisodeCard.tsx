@@ -12,6 +12,8 @@ export function EpisodeCard({ episode }: EpisodeCardProps) {
     (character) => character.image
   )
 
+  const characterlength = episode.characters.length
+
   return (
     <div>
       <FavoriteButton episodeId={episode.id} />
@@ -20,7 +22,7 @@ export function EpisodeCard({ episode }: EpisodeCardProps) {
 
       <Link to={`episode/${episode.id}`}>
         <img
-          src={charactersImageList[Number(episode.id)]}
+          src={charactersImageList[characterlength - 1]}
           alt="Episode image"
         />
         <h2>{episode.name}</h2>

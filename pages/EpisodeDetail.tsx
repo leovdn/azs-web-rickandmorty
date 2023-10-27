@@ -9,12 +9,12 @@ import CharacterCard from '../components/CharacterCard'
 
 const EpisodeDetail: React.FC = () => {
   const { id } = useParams()
-  const { episodes, loading, error } = useEpisodeContext() // Use the context hook to access episodes
+  const { episodes, loading, error } = useEpisodeContext()
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
 
-  // Find the specific episode based on the episodeId parameter
+  // Find the specific episode based on the id parameter
   const episode = episodes.find((ep) => ep.id.toString() === id)
 
   if (!episode) {
