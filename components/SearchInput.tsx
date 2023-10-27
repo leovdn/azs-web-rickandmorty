@@ -1,3 +1,5 @@
+import { TextField } from '@mui/material'
+
 interface SearchInputProps {
   value: string
   onChange: (value: string) => void
@@ -9,11 +11,11 @@ export default function SearchInput({ value, onChange }: SearchInputProps) {
   }
 
   return (
-    <input
-      type="text"
-      placeholder="Search by episode name"
-      value={value}
+    <TextField
+      label="Search episode"
       onChange={handleInputChange}
+      value={value}
+      fullWidth
     />
   )
 }

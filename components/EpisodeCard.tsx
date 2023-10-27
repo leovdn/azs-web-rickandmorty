@@ -22,9 +22,15 @@ export function EpisodeCard({ episode }: EpisodeCardProps) {
   const characterlength = episode.characters.length
 
   return (
-    <Card sx={{ maxWidth: 300, position: 'relative' }}>
+    <Card
+      sx={{
+        maxWidth: 300,
+        position: 'relative',
+        boxShadow: '4px 4px 14px rgba(0,0,0,0.4)',
+      }}
+    >
       <CardActionArea>
-        <Link to={`episode/${episode.id}`}>
+        <Link to={`/episode/${episode.id}`}>
           <CardMedia>
             <img
               src={charactersImageList[characterlength - 1]}
@@ -47,8 +53,8 @@ export function EpisodeCard({ episode }: EpisodeCardProps) {
           </CardContent>
         </Link>
       </CardActionArea>
-      <FavoriteButton episodeId={episode.id} />
-      <WatchedButton episodeId={episode.id} />
+      <FavoriteButton episodeId={episode.id} absolute />
+      <WatchedButton episodeId={episode.id} absolute />
     </Card>
   )
 }

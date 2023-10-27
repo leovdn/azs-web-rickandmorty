@@ -3,9 +3,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import { IconButton } from '@mui/material'
 interface FavoriteButtonProps {
   episodeId: string
+  absolute?: boolean
 }
 
-export default function FavoriteButton({ episodeId }: FavoriteButtonProps) {
+export default function FavoriteButton({
+  episodeId,
+  absolute,
+}: FavoriteButtonProps) {
   const [isFavorite, setIsFavorite] = useState(false)
 
   const toggleFavorite = () => {
@@ -39,7 +43,7 @@ export default function FavoriteButton({ episodeId }: FavoriteButtonProps) {
     <IconButton
       onClick={toggleFavorite}
       sx={{
-        position: 'absolute',
+        position: absolute ? 'absolute' : 'initial',
         top: 8,
         left: 8,
         zIndex: 1,

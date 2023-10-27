@@ -6,6 +6,8 @@ import { useEpisodeContext } from '../context/EpisodeContext'
 import FavoriteButton from '../components/FavoriteButton'
 import WatchedButton from '../components/WatchedButton'
 import CharacterCard from '../components/CharacterCard'
+import { Box, Container } from '@mui/material'
+import { MainContainer } from '../styles/home'
 
 const EpisodeDetail: React.FC = () => {
   const { id } = useParams()
@@ -22,20 +24,30 @@ const EpisodeDetail: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>{episode.name}</h1>
-      <FavoriteButton episodeId={episode.id} />
-      <WatchedButton episodeId={episode.id} />
-      <p>Episode Number: {episode.id}</p>
-      <p>Air Date: {episode.air_date}</p>
-      <h2>Characters in this Episode</h2>
+    <MainContainer>
+      <Container>
+        <Box display="flex" alignItems="center" gap="2rem">
+          <h1>{episode.name}</h1>
 
-      <ul>
-        {episode.characters.map((character) => (
-          <CharacterCard key={character.id} character={character} />
-        ))}
-      </ul>
-    </div>
+          <Box position="relative">
+            <FavoriteButton episodeId={episode.id} />
+            <WatchedButton episodeId={episode.id} />
+          </Box>
+        </Box>
+
+        <Box>
+          <p>Episode Number: {episode.id}</p>
+          <p>Air Date: {episode.air_date}</p>
+          <h2>Characters in this Episode</h2>
+        </Box>
+
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
+          {episode.characters.map((character) => (
+            <CharacterCard key={character.id} character={character} />
+          ))}
+        </Box>
+      </Container>
+    </MainContainer>
   )
 }
 

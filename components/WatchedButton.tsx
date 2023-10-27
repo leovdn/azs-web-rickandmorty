@@ -3,9 +3,13 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 import { IconButton } from '@mui/material'
 interface WatchedButtonProps {
   episodeId: string
+  absolute?: boolean
 }
 
-export default function WatchedButton({ episodeId }: WatchedButtonProps) {
+export default function WatchedButton({
+  episodeId,
+  absolute,
+}: WatchedButtonProps) {
   const [isWatched, setIsWatched] = useState(false)
 
   const toggleWatched = () => {
@@ -39,7 +43,7 @@ export default function WatchedButton({ episodeId }: WatchedButtonProps) {
     <IconButton
       onClick={toggleWatched}
       sx={{
-        position: 'absolute',
+        position: absolute ? 'absolute' : 'initial',
         right: '4px',
         top: '4px',
         zIndex: 1,
